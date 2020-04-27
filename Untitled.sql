@@ -24,3 +24,4 @@ insert into employee(first_name, last_name, role_id, manager_id) values
 select * from department;
 select * from role;
 select * from employee;
+update employee set role_id=3 where id=4

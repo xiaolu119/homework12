@@ -21,7 +21,7 @@ function displayOptions(){
             type:"list", 
             message: "two options",
             name: "choice",
-            choices: ["Display Employees","Display Roles","Display Departments","Add Employee","Add role", "Add department","exit"]
+            choices: ["Display Employees","Display Roles","Display Departments","Add Employee","Add role", "Add department","Update Employees","exit"]
 
         }
     ])
@@ -35,7 +35,10 @@ function displayOptions(){
                 break;
             case "Display Departments":
                 displayDepartments();
-                break;     
+                break;  
+            case "Update Employees":
+                updateemployees();
+                break;       
             case"Add Employee":
             addemployee();
             break;
@@ -162,4 +165,30 @@ function displayDepartments(){
         displayOptions()
     }
     )
+}
+
+function updateemployees(){
+    inquirer.prompt([
+        {
+            type:"list",
+            message:"Select employee_id",
+            name:"employee_id",
+            choices :[1,2,3,4,5,6,7,8,9,10]
+        },
+        {
+            type:"list",
+            message:"Select role_id",
+            name:"role_id",
+            choices :[1,2,3,4,5,6,7,8,9,10,11]
+        }
+    ]).then(function(usedata){
+    connection.query("update employee set role_id=? where id=?", 
+    [usedata.role_id, usedata.employee_id], function(err,res)
+    {
+     if(err) throw err
+     console.log("emloyee added")
+     displayOptions()
+    })
+})
+
 }
