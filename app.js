@@ -27,6 +27,15 @@ function displayOptions(){
     ])
     .then(function(res){
         switch(res.choice){
+            case "Display Employees":
+                displayEmployees();
+                break;
+            case "Display Roles":
+                displayRoles();
+                break;
+            case "Display Departments":
+                displayDepartments();
+                break;     
             case"Add Employee":
             addemployee();
             break;
@@ -125,4 +134,32 @@ function adddepartment(){
      displayOptions()
     })
 })
+}
+function displayEmployees(){
+connection.query("select * from employee", function(err,res){
+    if(err) throw err
+    console.table(res)
+    displayOptions()
+}
+)
+
+}
+
+function displayRoles(){
+    connection.query("select * from role", function(err,res){
+        if(err) throw err
+        console.table(res)
+        displayOptions()
+    }
+    )
+}
+
+
+function displayDepartments(){
+    connection.query("select * from department", function(err,res){
+        if(err) throw err
+        console.table(res)
+        displayOptions()
+    }
+    )
 }
